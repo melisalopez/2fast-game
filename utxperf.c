@@ -36,7 +36,6 @@
 #define SEND_BUFSIZE 20
 
 
-static char seq1[20] = {1,4,6,3,5,3,6,7,0,1,2,6,1,4,7,3,1,0,4,5};
 static char send_bors[1];
 static char recv_bors[1];
 static unsigned rxperf_port = 2222;
@@ -71,7 +70,6 @@ void utxperf_application_thread()
 				xil_printf("error creating socket\r\n");
 				return;
 			}
-            
 
 			memset((void*)&serv_addr, 0, sizeof serv_addr);
 			serv_addr.sin_family = AF_INET;
@@ -104,10 +102,10 @@ void utxperf_application_thread()
 			}
 			connection_ok();
 			print("Connection established\r\n");
-
+	
 			/*Random sequence generation*/
 			for (n = 0; n<SEND_BUFSIZE ; n++){
-					send_buf[n] = seq1[n] + '0';
+					send_buf[n] = rand(i%8) + '0';
 			}
 
 			/* keep sending data */
